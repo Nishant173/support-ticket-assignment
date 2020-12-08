@@ -1,7 +1,6 @@
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Union
 import json
 import requests
-import pandas as pd
 import config
 
 
@@ -16,58 +15,45 @@ def get_tickets() -> Union[List[Dict], List]:
 
 
 def post_ticket(dict_obj: Dict) -> Dict:
-    """Posts one ticket to API, and returns response containing what was posted"""
+    """Posts one ticket to API, and returns dictionary containing `status_code`"""
     response = requests.post(url=config.URL_TICKETS,
                              headers=config.AUTH_CREDENTIALS,
                              data=json.dumps(dict_obj))
-    response = response.json()
-    return response
+    return {'status_code': response.status_code}
 
 
-def is_valid_post_ticket(response: Dict,
-                         dict_obj_sent: Dict) -> bool:
-    """
-    Checks if POST request made was valid. Returns True if valid; False otherwise.
-    Parameters:
-        - response (dict): Response received on making POST request.
-        - dict_obj_sent (dict): Python dictionary object sent (posted) to the API.
-    """
-    subject_exists = (True if response.get('subject', None) else False)
-    if not subject_exists:
-        return False
-    is_same_subject = (response.get('subject', '') == dict_obj_sent.get('subject', ''))
-    is_same_email = (response.get('email', '') == dict_obj_sent.get('email', ''))
-    if is_same_subject and is_same_email:
-        return True
-    return False
-
-
-def filter_tickets(tickets: Union[List[Dict], List],
-                   email: Optional[str] = None,
-                   status: Optional[str] = None) -> Union[List[Dict], List]:
-    """Filters list of tickets based on certain parameters"""
-    df = pd.DataFrame(data=tickets)
-    if email:
-        df = df[df['email'].str.lower() == str(email).lower().strip()]
-    if status:
-        df = df[df['status'].str.lower() == str(status).lower().strip()]
-    return df.to_dict(orient='records')
+# def is_valid_post_ticket(response: Dict,
+#                          dict_obj_sent: Dict) -> bool:
+#     """
+#     Checks if POST request made was valid. Returns True if valid; False otherwise.
+#     Parameters:
+#         - response (dict): Response received on making POST request.
+#         - dict_obj_sent (dict): Python dictionary object sent (posted) to the API.
+#     """
+#     subject_exists = (True if response.get('subject', None) else False)
+#     if not subject_exists:
+#         return False
+#     is_same_subject = (response.get('subject', '') == dict_obj_sent.get('subject', ''))
+#     is_same_email = (response.get('email', '') == dict_obj_sent.get('email', ''))
+#     if is_same_subject and is_same_email:
+#         return True
+#     return False
 
 
 if __name__ == "__main__":
     # GET
     tickets = get_tickets()
-    tickets = filter_tickets(tickets=tickets, email=None, status=None)
-    print(pd.DataFrame(tickets)[['subject', 'email']])
+    print(tickets)
 
     # POST
     dict_obj = {
-        "subject": "Some subject",
+        "subject": "Some random subject",
         "departmentId": "7189000000051431",
         "contactId": "7189000001119001",
-        "email": "nishant@gmail.com",
+        "email": "nishant@yahoo.com",
     }
     response = post_ticket(dict_obj=dict_obj)
-    is_valid = is_valid_post_ticket(response=response,
-                                    dict_obj_sent=dict_obj)
-    print(is_valid)
+    if response.get('status_code', '') in [200, 201]:
+        print("VALID")
+    else:
+        print("INVALID")
