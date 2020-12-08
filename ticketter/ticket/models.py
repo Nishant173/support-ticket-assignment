@@ -43,7 +43,3 @@ class Ticket(models.Model):
 
     def __str__(self):
         return f"Username: {self.username} Subject: {self.subject}"
-    
-    @property
-    def details(self):
-        return f"Username: {self.username} Subject: {self.subject} Department: {self.department} Category: {self.category}"

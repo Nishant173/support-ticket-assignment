@@ -20,7 +20,7 @@ def create_ticket(request):
 
 @login_required
 def view_tickets(request):
-    tickets = Ticket.objects.all() # username__exact=request.username
+    tickets = Ticket.objects.filter(username__exact=request.user.username)
     is_empty = (len(tickets) == 0)
     context = {
         'tickets': tickets,
