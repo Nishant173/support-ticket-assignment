@@ -4,7 +4,7 @@
         <h1>No tickets to show for this user</h1>
     {% else %}
         {% for ticket in tickets %}
-            <p>{{ ticket }}</p>
+            <p>ID: {{ ticket.id }} Email: {{ ticket.email }} Subject: {{ ticket.subject }} Priority: {{ ticket.priority }}</p>
         {% endfor %}
     {% endif %}
 {% endblock content %}
