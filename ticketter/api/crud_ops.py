@@ -1,7 +1,7 @@
 from typing import Dict, List, Union
 import json
 import requests
-import config
+from . import config
 
 
 def get_tickets() -> Union[List[Dict], List]:
@@ -40,20 +40,20 @@ def post_ticket(dict_obj: Dict) -> Dict:
 #     return False
 
 
-if __name__ == "__main__":
-    # GET
-    tickets = get_tickets()
-    print(tickets)
+# if __name__ == "__main__":
+#     # GET
+#     tickets = get_tickets()
+#     print(tickets)
 
-    # POST
-    dict_obj = {
-        "subject": "Some random subject",
-        "departmentId": "7189000000051431",
-        "contactId": "7189000001119001",
-        "email": "nishant@yahoo.com",
-    }
-    response = post_ticket(dict_obj=dict_obj)
-    if response.get('status_code', '') in [200, 201]:
-        print("VALID")
-    else:
-        print("INVALID")
+#     # POST
+#     dict_obj = {
+#         "subject": "Some random subject",
+#         "departmentId": "7189000000051431",
+#         "contactId": "7189000001119001",
+#         "email": "nishant@yahoo.com",
+#     }
+#     response = post_ticket(dict_obj=dict_obj)
+#     if response.get('status_code', '') in [200, 201]:
+#         print("VALID")
+#     else:
+#         print("INVALID")
