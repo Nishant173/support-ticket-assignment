@@ -1,10 +1,16 @@
 {% extends 'account/base.html' %}
 {% block content %}
-    {% if is_empty %}
-        <h1>No tickets to show for this user</h1>
+    {% if is_error %}
+        <h1>There was an error getting ticket info</h1>
     {% else %}
-        {% for ticket in tickets %}
-            <p>ID: {{ ticket.id }} Email: {{ ticket.email }} Subject: {{ ticket.subject }} Priority: {{ ticket.priority }}</p>
-        {% endfor %}
+        {% if is_empty %}
+            <h1>No tickets to show for this user</h1>
+        {% else %}
+            <h1>Tickets for u/{{ username }}</h1>
+            <br/>
+            {% for ticket in tickets %}
+                <p>ID: {{ ticket.id }} Email: {{ ticket.email }} Subject: {{ ticket.subject }} Priority: {{ ticket.priority }}</p>
+            {% endfor %}
+        {% endif %}
     {% endif %}
 {% endblock content %}
