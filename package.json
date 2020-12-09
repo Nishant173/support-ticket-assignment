@@ -1,0 +1,35 @@
+{
+  "name": "support-ticket-assignment",
+  "version": "1.0.0",
+  "description": "PeerXP - Python Django developer assessment",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development --watch ./ticketter/frontend/src/index.js --output-path ./ticketter/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./ticketter/frontend/src/index.js --output-path ./ticketter/frontend/static/frontend/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nishant173/support-ticket-assignment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nishant173/support-ticket-assignment/issues"
+  },
+  "homepage": "https://github.com/Nishant173/support-ticket-assignment#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

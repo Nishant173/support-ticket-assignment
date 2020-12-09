@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Custom apps
     'account.apps.AccountConfig',
     'ticket.apps.TicketConfig',
+    'frontend.apps.FrontendConfig',
 
     # Third party apps
     'crispy_forms',
