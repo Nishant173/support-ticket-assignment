@@ -4,7 +4,7 @@
   "description": "PeerXP - Python Django developer assessment",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development --watch ./ticketter/frontend/src/index.js --output-path ./ticketter/frontend/static/frontend/main.js",
+    "dev": "webpack --mode development --watch ./ticketter/frontend/src/index.js --output-path ./ticketter/frontend/static/frontend",
     "build": "webpack --mode production ./ticketter/frontend/src/index.js --output-path ./ticketter/frontend/static/frontend/main.js"
   },
   "repository": {
