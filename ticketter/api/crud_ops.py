@@ -2,6 +2,7 @@ from typing import Dict, List, Union
 import json
 import requests
 from . import config
+from .errors import BadApiRequestError
 
 
 def get_tickets() -> Union[List[Dict], List]:
@@ -9,7 +10,7 @@ def get_tickets() -> Union[List[Dict], List]:
     response = requests.get(url=config.URL_TICKETS,
                             headers=config.AUTH_CREDENTIALS)
     if response.status_code not in [200, 201]:
-        raise Exception(f"Error with API request. Status code: {response.status_code}")
+        raise BadApiRequestError(f"Error with API request. Status code: {response.status_code}")
     tickets = response.json()['data']
     return tickets
 
