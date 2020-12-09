@@ -9,7 +9,17 @@
             <h1>Tickets for u/{{ username }}</h1>
             <br/>
             {% for ticket in tickets %}
-                <p>ID: {{ ticket.id }} Email: {{ ticket.email }} Subject: {{ ticket.subject }} Priority: {{ ticket.priority }}</p>
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <strong class="mr-2">{{ forloop.counter }})</strong>
+                        <a class="mr-2">EmailID: {{ ticket.email }}</a>
+                        <a class="text-muted">TicketID: {{ ticket.id }}</a>
+                    </div>
+                    <h4><p class="article-title">Subject: {{ ticket.subject }}</p></h4>
+                    <h4><p class="article-title">Category: {{ ticket.category }}</p></h4>
+                    <h4><p class="article-title">Priority: {{ ticket.priority }}</p></h4>
+                </div>
+                <br /><br />
             {% endfor %}
         {% endif %}
     {% endif %}
